@@ -9,11 +9,15 @@ sealed class Expr
 class Num(val value: Int) : Expr()
 class Sum(val left: Expr, val right: Expr) : Expr()
 
-fun eval(e: Expr): Int =
-        when (e) {
-            is Num -> todoTask8(e)
-            is Sum -> todoTask8(e)
-        }
+fun eval(expr: Expr): Int {
+    if (expr is Num) {
+        return expr.value
+    }
+    if (expr is Sum) {
+        return eval(expr.left) + eval(expr.right)
+    }
+    throw IllegalArgumentException("Unknown expression")
+}
 
 fun todoTask8(expr: Expr): Nothing = TODO(
     """
